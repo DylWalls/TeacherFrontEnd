@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Register from './Register/teacherRegister';
 import Login from './Login/login';
+import NavBar from './NavBar/NavBar';
+import Home from './Home/home';
 import './App.css';
 
 const App = () => {
@@ -31,19 +33,20 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        <div>
+      <div className="bgi">
+        <div className='header'>
           <h1>Register or Log In</h1>
         </div>
+        <NavBar/>
         <Switch>
-            <Route path="/" exact component={Register}/>
+            <Route path="/" exact component={Home}/>
+            <Route path="/register" exact component={Register}/>
             <Route path="/login" render={() => (
               <Login
                 isLoggedIn={isLoggedIn}
                 handleLogOut={handleLogOut}
-              />
-            )}
-            />
+              />)}/>
+            <Redirect to="/not-found"/>
         </Switch>
       </div>
     </Router>

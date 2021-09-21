@@ -1,10 +1,12 @@
 import React, {useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const Login = ({createTeacher, deleteTeacher}) => {
     const [teacher, setTeacher] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const history = useHistory();
     
 
 
@@ -20,7 +22,7 @@ const Login = ({createTeacher, deleteTeacher}) => {
         .then((res)=> {
             console.log(res.data)
             localStorage.setItem("token", res.data)
-            console.log(`Success ${localStorage.getItem("Token")}`)
+            console.log(`Success ${localStorage.getItem("token")}`)
         })
         .catch(error => console.log(error))
         console.log(teacher)
@@ -30,7 +32,7 @@ const Login = ({createTeacher, deleteTeacher}) => {
     return(
         <>
         <div>
-            <h2>Log In</h2>
+            <h2>Sign In</h2>
             <form onSubmit={submitHandler}>
                 <div>
                     <input type="email" name="Email" placeholder="Email.." onChange={e=> setEmail(e.target.value)}/>
