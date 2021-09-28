@@ -13,12 +13,14 @@ import './App.css';
 //Components
 import Register from './Register/teacherRegister';
 import Login from './Login/login';
-import NavBar from './NavBar/NavBar';
+import Activity from './Activity/activity';
+import ClassRoom from './Classroom/classroom';
 import Home from './Home/home';
 
 const App = () => {
   const [teacher, setTeacher] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false)
 
   useEffect(()=> {
     const jwt = localStorage.getItem('token');
@@ -39,6 +41,8 @@ const App = () => {
     <Router>
        <BrowserRouter>
         <Switch>
+          <Route path="/classroom" render={props => <ClassRoom {...props} user={teacher}/>}/>
+          <Route path="/activity" render={props => <Activity {...props} user={teacher}/>}/>
           <Route path="/home" render={props => <Home {...props} user={teacher}/>}/>
           <Route path="/register" component={Register}/>
           <Route path="/login" component={Login} />
@@ -56,7 +60,6 @@ const App = () => {
               return <Redirect to="/home"/>
             }
           }}/>
-          <Redirect to="/not-found"/>
         </Switch>
 
         </BrowserRouter>

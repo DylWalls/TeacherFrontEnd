@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import './teacherRegister.css';
 
-const Register = ({ createNewTeacher, newError}) => {
+const Register = ({user}) => {
     const [teacher, setTeacher] = useState({});
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
