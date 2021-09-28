@@ -5,15 +5,19 @@ import {
   Switch,
   Route,
   Redirect,
+  BrowserRouter,
+  Link,
 } from "react-router-dom";
+import './App.css';
+
+//Components
 import Register from './Register/teacherRegister';
 import Login from './Login/login';
 import NavBar from './NavBar/NavBar';
 import Home from './Home/home';
-import './App.css';
 
 const App = () => {
-  const [teacher, setTeacher] = useState({});
+  const [teacher, setTeacher] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(()=> {
@@ -26,30 +30,38 @@ const App = () => {
 
   },[])
 
-  const handleLogOut = (e) => {
-    e.preventDefault();
-    setIsLoggedIn(false);
-}
-
   return (
+<div>
+    <div className="header" user={teacher}>
+      Welcome to TinyTots App!
+    </div>
+
     <Router>
-      <div className="bgi">
-        <div className='header'>
-          <h1>Register or Log In</h1>
-        </div>
-        <NavBar/>
+       <BrowserRouter>
         <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/register" exact component={Register}/>
-            <Route path="/login" render={() => (
-              <Login
-                isLoggedIn={isLoggedIn}
-                handleLogOut={handleLogOut}
-              />)}/>
-            <Redirect to="/not-found"/>
+          <Route path="/home" render={props => <Home {...props} user={teacher}/>}/>
+          <Route path="/register" component={Register}/>
+          <Route path="/login" component={Login} />
+          <Route path="/register" render={props => {
+            if(!teacher){
+              return <Redirect to="/login"/>
+            }else{
+              return <Redirect to="/home"/>
+            }
+          }}/>
+          <Route path="/" render={props => {
+            if(!teacher){
+              return <Redirect to="/login"/>
+            }else{
+              return <Redirect to="/home"/>
+            }
+          }}/>
+          <Redirect to="/not-found"/>
         </Switch>
-      </div>
+
+        </BrowserRouter>
     </Router>
+</div>
   )
 }
 

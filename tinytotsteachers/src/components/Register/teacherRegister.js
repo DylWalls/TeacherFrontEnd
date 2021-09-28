@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { Link } from 'react-router-dom';
+import './teacherRegister.css';
 
 const Register = ({ createNewTeacher, newError}) => {
     const [teacher, setTeacher] = useState({});
@@ -26,15 +28,17 @@ const Register = ({ createNewTeacher, newError}) => {
         })
         .then((res) => {
             console.log(res)
+            localStorage.setItem("token", res.data)
             setTeacher(res);
+            window.location = '/home';
         })
         .catch(error => console.log(error));
 
     }
 
     return(
-        <div>
-            <h1>Register</h1>
+        <div className="box">
+            <div className="*">Register</div>
                 <form onSubmit={submitHandler}>
                     <div>
                         <input type="email" name="Email" placeholder="Email.." onChange ={e=> setEmail(e.target.value)}/>
@@ -51,6 +55,9 @@ const Register = ({ createNewTeacher, newError}) => {
                     <div>
                         <button onClick={()=>{registerTeacher()}}>Create Account</button>
                     </div>
+                    <div>
+                    <Link to='/login'>Already a member? Click here!</Link>
+                </div>
                 </form>
         </div>
     );

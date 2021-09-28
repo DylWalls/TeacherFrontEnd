@@ -1,14 +1,13 @@
 import React, {useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+// import '../Login/login.css'
 
 const Login = ({createTeacher, deleteTeacher}) => {
     const [teacher, setTeacher] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const history = useHistory();
     
-
 
     const submitHandler = (e) =>{
         e.preventDefault();
@@ -23,6 +22,7 @@ const Login = ({createTeacher, deleteTeacher}) => {
             console.log(res.data)
             localStorage.setItem("token", res.data)
             console.log(`Success ${localStorage.getItem("token")}`)
+            window.location = '/home';
         })
         .catch(error => console.log(error))
         console.log(teacher)
@@ -30,7 +30,7 @@ const Login = ({createTeacher, deleteTeacher}) => {
 
 
     return(
-        <>
+        <div className= "box">
         <div>
             <h2>Sign In</h2>
             <form onSubmit={submitHandler}>
@@ -43,9 +43,12 @@ const Login = ({createTeacher, deleteTeacher}) => {
                 <div>
                     <button onClick={()=>{loginTeacher()}}>Sign In</button>
                 </div>
+                <div>
+                    <Link to='/register'>Not a member. Click here</Link>
+                </div>
             </form>
         </div>
-        </>
+        </div>
     )
 }
 export default Login;

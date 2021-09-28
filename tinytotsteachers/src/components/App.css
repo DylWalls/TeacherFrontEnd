@@ -1,15 +1,32 @@
+/*Responsive Background*/
+body{
+  background: url(../assets/HomemadeFingerPaint.jpg);
+  background-repeat: no-repeat;
+  display: grid;
+  background-size:cover;
+  background-position: fixed;
+}
+
+
 /* Style the header */
 .header {
   padding: 20px;
   text-align: center;
 }
 
-/*Background Image*/
-.bgi{
-  background-image: url(../assets/BackgroundParents.jpg);
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
-  width: 200vh;
-  height: 100vh;
+h1 {
+  display: block;
+  text-transform: uppercase;
+  font-size: 48px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(0, 0, 0);
+  margin-block-start: 0.67em;
+  margin-block-end: 0.80em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin-top: 20px;
 }
+
+
+
