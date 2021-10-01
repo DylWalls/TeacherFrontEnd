@@ -5,24 +5,16 @@ import { Link } from 'react-router-dom';
 
 const Home = ({user}) => {
     const [teacher, setTeacher] = useState("");
-    const [students, setStudents] = useState([]);
 
 
-    const CreateActivity = async () =>{
-        let endpoint = `http://localhost:5000/api/users/${user.teacher._id}/activities`
-        await axios.post(endpoint,{
-
-        })
-        .then((res) => {
-            console.log(res)
-        })
-        .catch(error => console.log(error));
-    }
+    
     const LogOut = () => {
         localStorage.removeItem("token")
-        console.log(`${user.teacher._id} has been logged out!`)
+        console.log(`${teacher._id} has been logged out!`)
         window.location = '/login'
     }
+
+    console.log("Teacher on homepage:", user);
     
     return(
     <div>

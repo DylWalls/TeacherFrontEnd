@@ -9,6 +9,7 @@ const Activity = ({user}) => {
     const [date, setDate] = useState("");
     const [location, setLocation] = useState("");
     const [eventAct, setEventAct] = useState("");
+    const [eventId, setEventId] = useState("")
 
     const createEvent = event =>{
         console.log(event);
@@ -19,7 +20,7 @@ const Activity = ({user}) => {
         createEvent(event)
     }
     const createEvents = async () => {
-        await axios.post(`http://localhost:5000/api/users/${user.teacher._id}/activities`, {
+        await axios.post(`http://localhost:5000/api/users/${user._id}/activities`, {
             eventName: eventName,
             date: date,
             location: location,
@@ -27,18 +28,21 @@ const Activity = ({user}) => {
         })
         .then((res) => {
             console.log(res)
-            window.location = '/activity';
+            window.location = '/seeActivities';
         })
         .catch(error => console.log(error));
 
     }
 
     const deleteEvents = async () => {
-        await axios.delete(`http://localhost:5000/api/users/${user.teacher._id}/activities/${user.teacher.activities._id}`)
-        window.location = "/home"
+        await axios.delete(`http://localhost:5000/api/users/${user._id}/activities/${user.activities._id}`)
+        window.location = "/seeActivities"
     }
     return(
         <div>
+            {
+                console.log("Teacher in render on Activity page:", user)
+            }
             <div>
                 <Link to='/home'>Go Home</Link>
             </div>
@@ -86,16 +90,19 @@ const Activity = ({user}) => {
                 <div>Delete Activity</div>
                     <form onSubmit={submitHandler}>
                         <div>
-                            <input type="eventName" name="Name of Event" placeholder="Name of Event" onChange ={e=> setEventName(e.target.value)}/>
+                            <input type="eventID" name="EventID" placeholder="Event Id" onChange ={e=> setEventId(e.target.value)}/>
                         </div>                     
                         <div>
-                            <input type="location" name="Location of Event" placeholder="Event Location" onChange ={e=> setLocation(e.target.value)}/>
+                            <input type="eventName" name="Name of Event" placeholder="Name of Event" onChange ={e=> setEventName(e.target.value)}/>
                         </div>                    
                         <div>
                             <button onClick={()=>{deleteEvents()}}>Delete</button>
                         </div>
                     </form>
                 </div>
+                    <div>
+                        <Link to="/seeActivities">See Current Activities</Link>
+                    </div>
         </div>
     )
 }

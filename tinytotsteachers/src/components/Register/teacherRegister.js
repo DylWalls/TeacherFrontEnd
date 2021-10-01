@@ -33,9 +33,7 @@ const Register = ({user}) => {
             window.location = '/home';
         })
         .catch(error => console.log(error));
-
     }
-
     return(
         <div className="box">
             <div className="*">Register</div>

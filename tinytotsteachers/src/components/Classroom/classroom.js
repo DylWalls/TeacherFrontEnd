@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 const ClassRoom = ({user}) => {
     const [students, setStudents] = useState([]);
-
+    
 
     const currentRoom= async () => {
         console.log(user);
-        let endpoint = `http://localhost:5000/api/users/${user.teacher._id}/children`;
+        let endpoint = `http://localhost:5000/api/users/${user._id}/children`;
         console.log(endpoint);
         await axios.get(endpoint, {
         })
@@ -23,33 +23,37 @@ const ClassRoom = ({user}) => {
     return(
         <div>
             <div>
-                <Link to="home">Go Home</Link>
+                <Link to="/home">Go Home</Link>
             </div>
             <div className="teacher">
-                Current Teachers Name
+                Current Teachers Name:
+                <p>{user.firstName} {user.lastName}</p>
             </div>
             <div className="children">
-                <li>
-                    Child1
-                </li>
-                <li>
-                    Child2
-                </li>
-                <li>
-                    Child3
-                </li>
-                <li>
-                    Child4
-                </li>
-                <li>
-                    Child5
-                </li>
-                <li>
-                    Child6
-                </li>
-                  
-                
+            <ul>
+                        {user.children.map((user)=>(
+                            <li key={user._id}>
+                                <span>
+                                    <div>
+                                  Name: {user.firstName} {user.lastName}
+                                    </div>
+                                    <li>
+                                  Allergies: {user.allergies}
+                                  </li>
+                                  <li>
+                                  Items in Stock: {user.stock}
+                                  </li>
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
             </div>
+                  <div className="addstudent">
+                      <Link to="/addStudent">Add a student</Link>
+                  </div>
+                  <div className="deletes">
+                      <Link to="/deleteStudent">Delete a student</Link>
+                  </div>
         </div>
     )
 

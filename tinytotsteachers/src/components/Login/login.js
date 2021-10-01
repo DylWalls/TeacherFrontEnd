@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import '../Login/login.css'
 
-const Login = ({createTeacher, deleteTeacher}) => {
+const Login = ({user}) => {
     const [teacher, setTeacher] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
