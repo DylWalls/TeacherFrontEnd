@@ -15,12 +15,39 @@ const Activity = ({user}) => {
         console.log(event);
     }
 
+    const updateEvent = event =>{
+        console.log(event);
+    }
+
+    const deleteEvent = event =>{
+        console.log(event);
+    }
+    
+
     const submitHandler = (e) => {
         e.preventDefault();
         createEvent(event)
+        updateEvent(event)
+        deleteEvent(event)
     }
     const createEvents = async () => {
         await axios.post(`http://localhost:5000/api/users/${user._id}/activities`, {
+            eventName: eventName,
+            date: date,
+            location: location,
+            eventAct: eventAct,
+        })
+        .then((res) => {
+            console.log(res)
+            window.location = '/seeActivities';
+        })
+        .catch(error => console.log(error));
+
+    }
+
+    const updateEvents = async () => {
+        await axios.patch(`http://localhost:5000/api/users/${user._id}/activities/${user.activities._id}`, {
+            eventId: eventId,
             eventName: eventName,
             date: date,
             location: location,
@@ -70,6 +97,9 @@ const Activity = ({user}) => {
                 <div>Update Activity</div>
                     <form onSubmit={submitHandler}>
                         <div>
+                            <input type="eventID" name="EventID" placeholder="Event Id" onChange ={e=> setEventId(e.target.value)}/>
+                        </div>
+                        <div>
                             <input type="eventName" name="Name of Event" placeholder="Name of Event" onChange ={e=> setEventName(e.target.value)}/>
                         </div>
                         <div>
@@ -82,7 +112,7 @@ const Activity = ({user}) => {
                             <input type="eventAct" name="Event Activity" placeholder="Event Activity" onChange ={e=> setEventAct(e.target.value)}/>
                         </div>
                         <div>
-                            <button onClick={()=>{createEvent()}}>Update</button>
+                            <button onClick={()=>{updateEvents()}}>Update</button>
                         </div>
                     </form>
                 </div>

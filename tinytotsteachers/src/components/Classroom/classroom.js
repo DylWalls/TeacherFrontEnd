@@ -30,7 +30,7 @@ const ClassRoom = ({user}) => {
                 <p>{user.firstName} {user.lastName}</p>
             </div>
             <div className="children">
-            <ul>
+                <ul>
                         {user.children.map((user)=>(
                             <li key={user._id}>
                                 <span>
@@ -46,7 +46,7 @@ const ClassRoom = ({user}) => {
                                 </span>
                             </li>
                         ))}
-                    </ul>
+                </ul>
             </div>
                   <div className="addstudent">
                       <Link to="/addStudent">Add a student</Link>

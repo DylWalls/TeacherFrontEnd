@@ -31,6 +31,9 @@ const Login = ({user}) => {
 
     return(
         <div className= "box">
+             <div className="header" user={teacher}>
+      Welcome {teacher.firstName} {teacher.lastName} to TinyTots App!
+    </div>
         <div>
             <h2>Sign In</h2>
             <form onSubmit={submitHandler}>

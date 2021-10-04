@@ -30,12 +30,15 @@ const Register = ({user}) => {
             console.log(res)
             localStorage.setItem("token", res.data)
             setTeacher(res);
-            window.location = '/home';
+            window.location = '/login';
         })
         .catch(error => console.log(error));
     }
     return(
         <div className="box">
+             <div className="header" user={teacher}>
+      Welcome {teacher.firstName} {teacher.lastName} to TinyTots App!
+    </div>
             <div className="*">Register</div>
                 <form onSubmit={submitHandler}>
                     <div>

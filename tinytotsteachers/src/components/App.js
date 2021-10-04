@@ -23,7 +23,7 @@ import axios from 'axios';
 
 const App = () => {
   const [teacher, setTeacher] = useState(null);
-  
+
   useEffect(()=> {
     const jwt = localStorage.getItem('token');
 
@@ -45,14 +45,14 @@ const App = () => {
   if(!teacher){
     return(
       <React.Fragment>
-    <Router>
-    <BrowserRouter>
-     <Switch>
-     <Route path="/login" component={Login} />
-     <Route path="/register" component={Register}/>
-     </Switch>
-     </BrowserRouter>
-    </Router>
+      <Router>
+       <BrowserRouter>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register}/>
+          </Switch>
+        </BrowserRouter>
+      </Router>
     </React.Fragment>
     )
   }else{
@@ -68,7 +68,7 @@ const App = () => {
     <Router>
        <BrowserRouter>
         <Switch>
-          <Route path="/deleteStudent" render={props => <DeleteStudent {...props} user={teacher}/>}/>
+          <Route exact path="/deleteStudent" render={props => <DeleteStudent {...props} user={teacher}/>}/>
           <Route path="/addStudent" render={props => <NewStudent {...props} user={teacher}/>}/>
           <Route path="/seeActivities" render={props => <SeeActivities {...props} user={teacher}/>}/>
           <Route path="/classroom" render={props => <ClassRoom {...props} user={teacher}/>}/>
@@ -91,7 +91,6 @@ const App = () => {
             }
           }}/>
         </Switch>
-
         </BrowserRouter>
     </Router>
         
